@@ -12,7 +12,7 @@ class ExpectPlatformImplicitUsageProvider : ImplicitUsageProvider {
     override fun isImplicitUsage(element: PsiElement): Boolean {
         // if the element is a class, mark it as used if it has any ExpectPlatform methods
         if (element is PsiClass) {
-            return element.methods.any { it.isCommonExpectPlatform || it.commonMethods.isNotEmpty() }
+            return element.methods.any(::isImplicitUsage)
         }
 
         // if the method is implementing a common ExpectPlatform method mark it as used
